@@ -13,4 +13,11 @@
    margin: 0 auto;
    -webkit-box-sizing: border-box;
    box-sizing: border-box;
+   padding: 0 19px;
+}
+
+@media screen and (max-width: 880px) {
+   .main-page {
+      padding: 0;
+   }
 }
