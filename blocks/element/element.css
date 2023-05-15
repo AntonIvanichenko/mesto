@@ -1,0 +1,32 @@
+.element {
+   max-width: 282px;
+   background: #FFFFFF;
+   border-radius: 10px;
+   overflow: hidden;
+}
+
+.element__image {
+   width: 100%;
+   display: block;
+   object-fit: contain;
+}
+
+.element__group {
+   display: flex;
+   justify-content: space-between;
+   padding-top: 25px;
+   padding-bottom: 31px;
+   padding-left: 21px;
+   padding-right: 20px;
+}
+
+.element__title {
+   font-weight: 900;
+   font-size: 24px;
+   line-height: 1.2;
+   margin: 0;
+}
+
+.element__icon {
+   width: 22px;
+}
