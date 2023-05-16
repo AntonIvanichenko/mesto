@@ -1,0 +1,22 @@
+.element__button {
+   width: 22px;
+   height: 19px;
+   border: none;
+   background-color: white;
+   background-image: url("../../../images/heart.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: contain;
+   -ms-flex-item-align: center;
+   -ms-grid-row-align: center;
+   align-self: center;
+}
+
+.element__button:hover {
+   opacity: 0.5;
+}
+
+.element__button:active {
+   opacity: 1;
+   background-image: url("../../../images/black-heart.svg");
+}

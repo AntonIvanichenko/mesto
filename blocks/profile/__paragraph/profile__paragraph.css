@@ -1,4 +1,7 @@
 .profile__paragraph {
+   grid-column: 1 / span 2;
+   grid-row: 2 / 3;
+   align-self: start;
    font-size: 18px;
    line-height: 1.22;
    margin: 0;
@@ -18,6 +21,6 @@
 
 @media screen and (max-width: 550px) {
    .profile__paragraph {
-      text-align: center;
+      justify-self: center;
    }
 }
