@@ -18,7 +18,6 @@
    padding-top: 34px;
    -webkit-box-sizing: border-box;
    box-sizing: border-box;
-   z-index: 2;
 }
 
 @media screen and (max-width: 600px) {
