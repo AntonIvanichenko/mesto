@@ -14,7 +14,7 @@
    box-sizing: border-box;
    padding: 0;
    margin-bottom: 9px;
-   cursor: pointer
+   cursor: pointer;
 }
 
 .profile__button:hover {

@@ -10,7 +10,7 @@
    -ms-flex-item-align: center;
    -ms-grid-row-align: center;
    align-self: center;
-   cursor: pointer
+   cursor: pointer;
 }
 
 .element__button:hover {

@@ -10,7 +10,7 @@
    position: absolute;
    top: -32px;
    right: -32px;
-   cursor: pointer
+   cursor: pointer;
 }
 
 .popup__close-icon:hover {
