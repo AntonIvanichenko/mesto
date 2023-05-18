@@ -1,6 +1,8 @@
 .profile__button {
    width: 24px;
    height: 24px;
+   -ms-flex-item-align: end;
+   -ms-grid-row-align: end;
    align-self: end;
    background-image: url(../../../images/profile-button.svg);
    background-position: center;
@@ -12,6 +14,7 @@
    box-sizing: border-box;
    padding: 0;
    margin-bottom: 9px;
+   cursor: pointer
 }
 
 .profile__button:hover {
@@ -28,6 +31,7 @@
 
 @media screen and (max-width: 550px) {
    .profile__button {
+      -ms-grid-column-align: start;
       justify-self: start;
       width: 18px;
       height: 18px;

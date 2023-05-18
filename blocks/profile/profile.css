@@ -1,7 +1,11 @@
 .profile {
-   display: -webkit-box;
-   display: -ms-flexbox;
-   display: flex;
+   display: -ms-grid;
+   display: grid;
+   -ms-grid-columns: auto 30px 1fr 30px 1fr;
+   grid-template-columns: auto 1fr 1fr;
+   -webkit-column-gap: 30px;
+   -moz-column-gap: 30px;
+   column-gap: 30px;
    padding-top: 40px;
    padding-bottom: 50px;
    position: relative;
@@ -16,12 +20,13 @@
 
 @media screen and (max-width: 550px) {
    .profile {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
       -ms-flex-line-pack: center;
       align-content: center;
    }

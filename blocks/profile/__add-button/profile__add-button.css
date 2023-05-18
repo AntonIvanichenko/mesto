@@ -1,35 +1,31 @@
-.add-button {
+.profile__add-button {
    width: 150px;
    height: 50px;
+   -ms-grid-column-align: end;
+   justify-self: end;
+   -ms-flex-item-align: center;
+   -ms-grid-row-align: center;
+   align-self: center;
    background-color: #000000;
    border: 2px solid #FFFFFF;
    -webkit-box-sizing: border-box;
    box-sizing: border-box;
-   top: 75px;
-   right: 0;
+   cursor: pointer
 }
 
-.add-button:hover {
+.profile__add-button:hover {
    opacity: 0.6;
 }
 
 @media screen and (max-width: 880px) {
-   .add-button {
+   .profile__add-button {
       right: 19px;
    }
 }
 
-@media screen and (max-width: 768px) {
-   .add-button {
-      width: 50px;
-      height: 50px;
-   }
-}
-
 @media screen and (max-width: 550px) {
-   .add-button {
+   .profile__add-button {
       width: 282px;
       height: 50px;
-      position: static;
    }
 }
