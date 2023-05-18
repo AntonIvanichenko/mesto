@@ -1,0 +1,30 @@
+.popup__form {
+   width: 430px;
+   height: 330px;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   -webkit-box-align: center;
+   -ms-flex-align: center;
+   align-items: center;
+   border-radius: 10px;
+   background-color: #FFFFFF;
+   margin: 0 auto;
+   position: relative;
+   padding-top: 34px;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   z-index: 2;
+}
+
+@media screen and (max-width: 600px) {
+   .popup__form {
+      width: 282px;
+      height: 322px;
+      padding-top: 25px;
+   }
+}

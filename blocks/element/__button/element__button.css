@@ -6,7 +6,7 @@
    background-image: url("../../../images/heart.svg");
    background-repeat: no-repeat;
    background-position: center;
-   background-size: contain;
+   background-size: 100%;
    -ms-flex-item-align: center;
    -ms-grid-row-align: center;
    align-self: center;

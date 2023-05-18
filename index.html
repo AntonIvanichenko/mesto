@@ -7,6 +7,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mesto</title>
    <link rel="stylesheet" href="./pages/index.css">
+   <script src="./scripts/index.js" defer></script>
 </head>
 
 <body class="page">
@@ -19,8 +20,7 @@
             <img class="profile__avatar" src="./images/profile-image.jpg" alt="Фото профиля">
             <div class="profile__info">
                <h1 class="profile__title">Жак-Ив Кусто</h1>
-               <button class="profile__button"><img class="profile__image" src="./images/profile-button.svg"
-                     alt="Иконка шариковая ручка"></button>
+               <button class="profile__button"></button>
                <p class="profile__paragraph">Исследователь океана</p>
             </div>
             <button class="add-button"><img class="add-button__image" src="./images/add-button.svg" alt="Плюс"></button>
@@ -73,8 +73,20 @@
       <footer class="footer conteiner">
          <p class="footer__paragraph">&copy; 2020 Mesto Russia</p>
       </footer>
+      <section class="popup">
+         <form class="popup__form">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <fieldset class="popup__field-container">
+               <input id="users-name" type="text" name="name" class="popup__field">
+               <input id="users-job" type="text" name="job" class="popup__field">
+            </fieldset>
+            <button class="popup__submit-button" type="submit">
+               <p class="popup__button-text">Сохранить</p>
+            </button>
+            <button class="popup__close-icon"></button>
+         </form>
+      </section>
    </div>
-   <script src=""></script>
 </body>
 
 </html>
