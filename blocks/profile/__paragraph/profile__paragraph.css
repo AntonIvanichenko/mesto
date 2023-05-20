@@ -30,6 +30,7 @@
 
 @media screen and (max-width: 550px) {
    .profile__paragraph {
+      max-width: 282px;
       -ms-grid-column-align: center;
       justify-self: center;
    }
