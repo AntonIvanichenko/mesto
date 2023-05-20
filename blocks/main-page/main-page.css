@@ -1,8 +1,6 @@
 .main-page {
-   max-width: 1280px;
+   max-width: 880px;
    margin: 0 auto;
-   -webkit-box-sizing: border-box;
-   box-sizing: border-box;
    padding: 0 19px;
    position: relative;
 }

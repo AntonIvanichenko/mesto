@@ -7,7 +7,7 @@
    background-image: url(../../../images/profile-button.svg);
    background-position: center;
    background-repeat: no-repeat;
-   background-size: 42%;
+   background-size: 10px;
    background-color: #000000;
    border: 1px solid #FFFFFF;
    -webkit-box-sizing: border-box;
@@ -35,5 +35,6 @@
       justify-self: start;
       width: 18px;
       height: 18px;
+      background-size: 7.5px;
    }
 }

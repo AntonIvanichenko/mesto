@@ -12,82 +12,84 @@
 
 <body class="page">
    <div class="main-page">
-      <header class="header conteiner">
+      <header class="header">
          <img class="logo" src="./images/__logo.svg" alt="Логотип надпись Место">
       </header>
       <main class="main">
-         <section class="profile conteiner">
+         <section class="profile">
             <img class="profile__avatar" src="./images/profile-image.jpg" alt="Фото профиля">
             <div class="profile__info">
                <h1 class="profile__title">Жак-Ив Кусто</h1>
-               <button class="profile__button"></button>
+               <button class="profile__button" type="button"></button>
                <p class="profile__paragraph">Исследователь океана</p>
             </div>
-            <button class="profile__add-button"><img class="profile__add-button-image" src="./images/add-button.svg"
-                  alt="Плюс"></button>
+            <button class="profile__add-button" type="button"></button>
          </section>
-         <section class="elements conteiner" aria-label="Карточки">
+         <section class="elements" aria-label="Карточки">
             <article class="element">
                <img class="element__image" src="./images/karachaevsk.jpg" alt="Старая церковь в горах">
                <div class="element__group">
                   <h3 class="element__title">Карачаевск</h3>
-                  <button class="element__button"></button>
+                  <button class="element__button" type="button"></button>
                </div>
             </article>
             <article class="element">
                <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус на горизонте">
                <div class="element__group">
                   <h3 class="element__title">Гора Эльбрус</h3>
-                  <button class="element__button"></button>
+                  <button class="element__button" type="button"></button>
                </div>
             </article>
             <article class="element">
                <img class="element__image" src="./images/dombay.jpg" alt="Горный хребет Домбай">
                <div class="element__group">
                   <h3 class="element__title">Домбай</h3>
-                  <button class="element__button"></button>
+                  <button class="element__button" type="button"></button>
                </div>
             </article>
             <article class="element">
                <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус на горизонте">
                <div class="element__group">
                   <h3 class="element__title">Гора Эльбрус</h3>
-                  <button class="element__button"></button>
+                  <button class="element__button" type="button"></button>
                </div>
             </article>
             <article class="element">
                <img class="element__image" src="./images/dombay.jpg" alt="Горный хребет Домбай">
                <div class="element__group">
                   <h3 class="element__title">Домбай</h3>
-                  <button class="element__button"></button>
+                  <button class="element__button" type="button"></button>
                </div>
             </article>
             <article class="element">
                <img class="element__image" src="./images/karachaevsk.jpg" alt="Старая церковь в горах">
                <div class="element__group">
                   <h3 class="element__title">Карачаево-Черкесия</h3>
-                  <button class="element__button"></button>
+                  <button class="element__button" type="button"></button>
                </div>
             </article>
          </section>
       </main>
-      <footer class="footer conteiner">
+      <footer class="footer">
          <p class="footer__paragraph">&copy; 2020 Mesto Russia</p>
       </footer>
-      <section class="popup">
-         <form class="popup__form">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <fieldset class="popup__field-container">
-               <input id="users-name" type="text" name="name" class="popup__field">
-               <input id="users-job" type="text" name="job" class="popup__field">
-            </fieldset>
-            <button class="popup__submit-button" type="submit">
-               <span class="popup__button-text">Сохранить</span>
-            </button>
-            <button class="popup__close-icon"></button>
-         </form>
-      </section>
-   </div>
+      <div class="popup">
+         <div class="popup__container">
+            <form class="popup__form" name="profile-info-form">
+               <h2 class="popup__title">Редактировать профиль</h2>
+               <fieldset class="popup__field-container">
+                  <input id="users-name" type="text" name="name" required placeholder="Введите Ваше имя"
+                     class="popup__field">
+                  <input id="users-job" type="text" name="job" required placeholder="Укажите Ваше место работы"
+                     class="popup__field">
+               </fieldset>
+               <button class="popup__submit-button" type="submit">
+                  <span class="popup__button-text">Сохранить</span>
+               </button>
+               <button class="popup__close-icon" type="button"></button>
+            </form>
+         </div>
+      </div>
 </body>
 
 </html>
