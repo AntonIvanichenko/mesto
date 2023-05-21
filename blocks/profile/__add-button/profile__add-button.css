@@ -6,7 +6,7 @@
    -ms-flex-item-align: center;
    -ms-grid-row-align: center;
    align-self: center;
-   background-color: #000000;
+   background-color: transparent;
    background-image: url("../../../images/add-button.svg");
    background-position: center;
    background-repeat: no-repeat;
