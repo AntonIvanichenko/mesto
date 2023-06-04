@@ -1,0 +1,7 @@
+.image-block__image {
+   max-width: 75vw;
+   max-height: 75vh;
+   display: block;
+   -o-object-fit: contain;
+   object-fit: contain;
+}

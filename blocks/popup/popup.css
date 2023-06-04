@@ -3,7 +3,7 @@
    height: 100%;
    display: -webkit-box;
    display: -ms-flexbox;
-   display: none;
+   display: flex;
    -webkit-box-pack: center;
    -ms-flex-pack: center;
    justify-content: center;
@@ -14,4 +14,12 @@
    top: 0;
    left: 0;
    background: rgba(0, 0, 0, 0.5);
+   opacity: 0;
+   visibility: hidden;
+   transition: visibility .3s, opacity .3s linear;
+}
+
+.popup.popup_opened {
+   visibility: visible;
+   opacity: 1;
 }
