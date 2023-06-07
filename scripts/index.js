@@ -3,15 +3,15 @@ const profileButton = document.querySelector('.profile__button');
 const profileTitle = document.querySelector('.profile__title');
 const profileParagraph = document.querySelector('.profile__paragraph');
 const profileCardAddButton = document.querySelector('.profile__add-button');
-const profilePopupBlock = document.querySelector('.popup');
-const profilePopupForm = profilePopupBlock.querySelector('.popup__form');
+const profilePopupBlock = document.querySelector('.profile-popup');
+const profilePopupForm = document.forms['profile-info-form'];
 const profilePopupCloseIcon = profilePopupBlock.querySelector('.popup__close-icon');
 const profilePopupInputName = document.querySelector('#users-name');
 const profilePopupInputJob = document.querySelector('#users-job');
 
 const сardAddPopup = document.querySelector('.popup_card_add');
 const сardPopupCloseIcon = сardAddPopup.querySelector('.popup__close-icon');
-const сardAddForm = сardAddPopup.querySelector('.popup__form');
+const сardAddForm = document.forms['profile-card-form'];
 const сardPlaceInput = сardAddPopup.querySelector('#place');
 const сardImageInput = сardAddPopup.querySelector('#image');
 
@@ -51,22 +51,17 @@ const initialCards = [
    }
 ];
 
-const openPopup = (parametr) => { //Добавляем класс элементу переданному в качестве аргумента
-   parametr.classList.add('popup_opened');
-
-   if (parametr === profilePopupBlock) {
-      profilePopupInputName.value = profileTitle.textContent;
-      profilePopupInputJob.value = profileParagraph.textContent;
-   };
+const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента
+   popup.classList.add('popup_opened');
 }
 
 
-const closePopup = (parametr) => { //удаляем у элемента класс
-   parametr.classList.remove('popup_opened');
+const closePopup = (popup) => { //удаляем у элемента класс
+   popup.classList.remove('popup_opened');
 }
 
 
-function handleFormSubmit(evt) { //Обработчик «отправки» формы, меняем текстовый контент profile 
+function handleProfileFormSubmit(evt) { //Обработчик «отправки» формы, меняем текстовый контент profile 
    evt.preventDefault();
 
    profileTitle.textContent = profilePopupInputName.value;
@@ -109,22 +104,24 @@ function createCard(placeName, imageSrc) { //функция с логикой с
 
 
 initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
-   const newCard = createCard(item.name, item.link);
-   elementsBlock.prepend(newCard);
+   const arrCards = createCard(item.name, item.link);
+   elementsBlock.prepend(arrCards);
 });
 
 
 function addCard(evt) { //функция добавления новых карточек пользователем
    evt.preventDefault();
 
-   const newCard = createCard(сardPlaceInput.value, сardImageInput.value);
-   elementsBlock.prepend(newCard);
+   const userCard = createCard(сardPlaceInput.value, сardImageInput.value);
+   elementsBlock.prepend(userCard);
    evt.target.reset();
    closePopup(сardAddPopup);
 }
 
 
 profileButton.addEventListener('click', function () { //слушатель кнопки открытия формы редактирования профиля
+   profilePopupInputName.value = profileTitle.textContent;
+   profilePopupInputJob.value = profileParagraph.textContent;
    openPopup(profilePopupBlock);
 });
 
@@ -132,7 +129,7 @@ profilePopupCloseIcon.addEventListener('click', function () { //слушател
    closePopup(profilePopupBlock);
 });
 
-profilePopupForm.addEventListener('submit', handleFormSubmit); //слушатель кнопки "сохранить" формы редактирования профиля
+profilePopupForm.addEventListener('submit', handleProfileFormSubmit); //слушатель кнопки "сохранить" формы редактирования профиля
 
 profileCardAddButton.addEventListener('click', function () { //слушатель кнопки "добавить" блока профайл
    openPopup(сardAddPopup);
