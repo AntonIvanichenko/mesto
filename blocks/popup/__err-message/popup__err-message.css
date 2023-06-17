@@ -1,0 +1,18 @@
+.popup__err-message {
+   min-height: 15px;
+   font-size: 12px;
+   line-height: 1.25;
+   color: #FF0000;
+   margin-top: 5px;
+   margin-bottom: 10px;
+}
+
+.popup__err-message:last-child {
+   margin-bottom: 28px;
+}
+
+@media screen and (max-width: 600px) {
+   .popup__err-message:last-child {
+      margin-bottom: 25px;
+   }
+}

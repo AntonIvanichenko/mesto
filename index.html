@@ -8,6 +8,7 @@
    <title>Mesto</title>
    <link rel="stylesheet" href="./pages/index.css">
    <script src="./scripts/index.js" defer></script>
+   <script src="./scripts/validate.js" defer></script>
 </head>
 
 <body class="page">
@@ -34,13 +35,15 @@
 
       <div class="popup profile-popup">
          <div class="popup__container">
-            <form class="popup__form" name="profile-info-form">
+            <form class="popup__form" name="profile-info-form" novalidate>
                <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
                <fieldset class="popup__field-container">
                   <input id="users-name" type="text" name="name" required placeholder="Введите Ваше имя"
-                     class="popup__field">
+                     class="popup__field" minlength="2" maxlength="40">
+                  <p class="popup__err-message"></p>
                   <input id="users-job" type="text" name="job" required placeholder="Укажите Ваше место работы"
-                     class="popup__field">
+                     class="popup__field" minlength="2" maxlength="200">
+                  <p class="popup__err-message"></p>
                </fieldset>
                <button class="popup__submit-button" type="submit">Сохранить</button>
                <button class="popup__close-icon" type="button"></button>
@@ -50,12 +53,15 @@
 
       <div class="popup popup_card_add">
          <div class="popup__container">
-            <form class="popup__form" name="profile-card-form">
+            <form class="popup__form" name="profile-card-form" novalidate>
                <h2 class="popup__title">Новое место</h2>
                <fieldset class="popup__field-container">
-                  <input id="place" type="text" name="place" required placeholder="Название" class="popup__field">
+                  <input id="place" type="text" name="place" required placeholder="Название" class="popup__field"
+                     minlength="2" maxlength="30">
+                  <p class="popup__err-message"></p>
                   <input id="image" type="text" name="image" required placeholder="Ссылка на картинку"
                      class="popup__field">
+                  <p class="popup__err-message"></p>
                </fieldset>
                <button class="popup__submit-button" type="submit">Создать</button>
                <button class="popup__close-icon" type="button"></button>
