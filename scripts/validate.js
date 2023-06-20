@@ -38,8 +38,10 @@ const hasInvalidField = (fieldList) => { //проверяем на валидн�
 const toggleButtonState = (fieldList, buttonElement) => { //выключаем кнопку если поля не прошли валидацию
    if (hasInvalidField(fieldList)) {
       buttonElement.classList.add(elementClasses.inactiveButtonClass);
+      buttonElement.setAttribute("disabled", "disabled");
    } else {
       buttonElement.classList.remove(elementClasses.inactiveButtonClass);
+      buttonElement.removeAttribute("disabled");
    }
 };
 
@@ -59,10 +61,6 @@ const enableValidation = () => { //ищем формы, отключаем submi
    const formList = Array.from(document.querySelectorAll(elementClasses.formSelector));
 
    formList.forEach((formElement) => {
-      formElement.addEventListener('submit', (evt) => {
-         evt.preventDefault();
-      });
-
       setEventListeners(formElement);
    });
 };

@@ -50,13 +50,22 @@ const initialCards = [
    }
 ];
 
+function closeByEsc(evt) { //обработчик esc 
+   if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup);
+   }
+}
+
 const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента
    popup.classList.add('popup_opened');
+   document.addEventListener('keydown', closeByEsc);
 }
 
 
 const closePopup = (popup) => { //удаляем у элемента класс
    popup.classList.remove('popup_opened');
+   document.removeEventListener('keydown', closeByEsc);
 }
 
 
@@ -114,6 +123,8 @@ function addCard(evt) { //функция добавления новых кар�
    const userCard = createCard(сardPlaceInput.value, сardImageInput.value);
    elementsBlock.prepend(userCard);
    evt.target.reset();
+   evt.submitter.classList.add('popup__submit-button_disabled')
+   evt.submitter.disabled = true;
    closePopup(сardAddPopup);
 }
 
@@ -127,14 +138,6 @@ popupCloseButtons.forEach((button) => { //обработчик крестико�
 popups.forEach((popup) => { //обработчик overlay
    popup.addEventListener('click', function (evt) {
       if (evt.target.classList.contains('popup')) {
-         closePopup(popup);
-      }
-   });
-});
-
-popups.forEach((popup) => { //обработчик esc   
-   document.body.addEventListener('keydown', function (evt) {
-      if (evt.key === 'Escape') {
          closePopup(popup);
       }
    });
