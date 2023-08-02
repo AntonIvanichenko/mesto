@@ -19,10 +19,6 @@ const elementsBlock = document.querySelector('.elements');
 const templateBlock = document.querySelector('#template').content;
 const elementBlock = templateBlock.querySelector('.element');
 
-const imageBlock = document.querySelector('.popup_image_open'); //открываем по клику картинку
-const imageBlockPic = imageBlock.querySelector('.image-block__image');
-const imageBlockText = imageBlock.querySelector('.image-block__text');
-
 const initialCards = [
    {
       name: 'Архыз',
@@ -78,50 +74,80 @@ function handleProfileFormSubmit(evt) { //Обработчик «отправк�
    closePopup(profilePopupBlock);
 }
 
+class Card {
+   constructor(item) {
+      this._placeName = item.name;
+      this._imageSrc = item.link;
+   }
 
-function createCard(placeName, imageSrc) { //функция с логикой создания новой карточки
-   const newCard = elementBlock.cloneNode(true);
+   _getTemplate() {
+      const newTemplate = document
+         .querySelector("#template")
+         .content.querySelector(".element")
+         .cloneNode(true);
 
-   const elementTitle = newCard.querySelector('.element__title');
-   elementTitle.textContent = placeName;//
-   const elementImage = newCard.querySelector('.element__image');
-   elementImage.src = imageSrc;
-   elementImage.setAttribute('alt', elementTitle.textContent); //присваиваем атрибуту alt название места
+      return newTemplate;
+   }
 
-   const elementLikeButton = newCard.querySelector('.element__button');//обработчик лайков
-   elementLikeButton.addEventListener('click', function () {
-      elementLikeButton.classList.toggle('element__button_theme_dark');
-   });
+   _setData() {
+      const elementTitle = this._newCard.querySelector('.element__title');
+      elementTitle.textContent = this._placeName;
+      const elementImage = this._newCard.querySelector('.element__image');
+      elementImage.src = this._imageSrc;
+      elementImage.setAttribute('alt', elementTitle.textContent); //присваиваем атрибуту alt название места
+   }
 
-   const elementDeleteButton = newCard.querySelector('.element__delete-button');//удаление карточек
-   elementDeleteButton.addEventListener('click', function () {
-      elementsBlock.removeChild(newCard);
-   });
+   _handleCardLikeButton(evt) {
+      evt.target.classList.toggle('element__button_theme_dark');
+   }
 
+   _handleDeleteCard() {
+      elementsBlock.removeChild(this._newCard);
+   }
 
-   elementImage.addEventListener('click', function () {
-
-      imageBlockPic.src = elementImage.src; //присваиваем открываемому изображению адресс изображения карточки
-      imageBlockText.textContent = elementTitle.textContent;//подпись к изображению
+   _handleViewCardImage() {
+      const imageBlock = document.querySelector('.popup_image_open'); //открываем по клику картинку
+      const imageBlockPic = imageBlock.querySelector('.image-block__image');
+      const imageBlockText = imageBlock.querySelector('.image-block__text');
+      imageBlockPic.src = this._imageSrc; //присваиваем открываемому изображению адресс изображения карточки
+      imageBlockText.textContent = this._placeName;//подпись к изображению
 
       openPopup(imageBlock);
-   });
+   }
 
-   return newCard;
+   _setListeners() {
+      const cardLikeButton = this._newCard.querySelector('.element__button');//обработчик лайков
+      cardLikeButton.addEventListener('click', this._handleCardLikeButton);
+
+      const cardDeleteButton = this._newCard.querySelector('.element__delete-button');//удаление карточек
+      cardDeleteButton.addEventListener('click', () => this._handleDeleteCard());
+
+      const cardMainImage = this._newCard.querySelector('.element__image');
+      cardMainImage.addEventListener('click', () => this._handleViewCardImage());
+   }
+
+   createCard() {
+      this._newCard = this._getTemplate();
+      this._setData();
+      this._setListeners();
+
+      return this._newCard;
+   }
 }
 
-
 initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
-   const arrCards = createCard(item.name, item.link);
-   elementsBlock.prepend(arrCards);
+   const arrCards = new Card(item);
+   elementsBlock.prepend(arrCards.createCard());
 });
 
 
 function addCard(evt) { //функция добавления новых карточек пользователем
    evt.preventDefault();
 
-   const userCard = createCard(сardPlaceInput.value, сardImageInput.value);
-   elementsBlock.prepend(userCard);
+   const name = сardPlaceInput.value;
+   const link = сardImageInput.value;
+   const userCard = new Card({ name, link });
+   elementsBlock.prepend(userCard.createCard());
    evt.target.reset();
    evt.submitter.classList.add('popup__submit-button_disabled')
    evt.submitter.disabled = true;
