@@ -1,6 +1,10 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 //поиск элементов в DOM-дереве
 const popups = document.querySelectorAll('.popup');
 const popupCloseButtons = document.querySelectorAll('.popup__close-icon');
+const formsList = document.querySelectorAll('.popup__form');
 const profileButton = document.querySelector('.profile__button');
 const profileTitle = document.querySelector('.profile__title');
 const profileParagraph = document.querySelector('.profile__paragraph');
@@ -15,7 +19,7 @@ const сardAddForm = document.forms['profile-card-form'];
 const сardPlaceInput = сardAddPopup.querySelector('#place');
 const сardImageInput = сardAddPopup.querySelector('#image');
 
-const elementsBlock = document.querySelector('.elements');
+export const elementsBlock = document.querySelector('.elements');
 const templateBlock = document.querySelector('#template').content;
 const elementBlock = templateBlock.querySelector('.element');
 
@@ -46,6 +50,14 @@ const initialCards = [
    }
 ];
 
+export const elementClasses = {
+   formSelector: '.popup__form',
+   inputSelector: '.popup__field',
+   submitButtonSelector: '.popup__submit-button',
+   inactiveButtonClass: 'popup__submit-button_disabled',
+   inputErrorClass: 'popup__field_type_error'
+};
+
 function closeByEsc(evt) { //обработчик esc 
    if (evt.key === 'Escape') {
       const openedPopup = document.querySelector('.popup_opened');
@@ -74,72 +86,10 @@ function handleProfileFormSubmit(evt) { //Обработчик «отправк�
    closePopup(profilePopupBlock);
 }
 
-class Card {
-   constructor(item) {
-      this._placeName = item.name;
-      this._imageSrc = item.link;
-   }
-
-   _getTemplate() {
-      const newTemplate = document
-         .querySelector("#template")
-         .content.querySelector(".element")
-         .cloneNode(true);
-
-      return newTemplate;
-   }
-
-   _setData() {
-      const elementTitle = this._newCard.querySelector('.element__title');
-      elementTitle.textContent = this._placeName;
-      const elementImage = this._newCard.querySelector('.element__image');
-      elementImage.src = this._imageSrc;
-      elementImage.setAttribute('alt', elementTitle.textContent); //присваиваем атрибуту alt название места
-   }
-
-   _handleCardLikeButton(evt) {
-      evt.target.classList.toggle('element__button_theme_dark');
-   }
-
-   _handleDeleteCard() {
-      elementsBlock.removeChild(this._newCard);
-   }
-
-   _handleViewCardImage() {
-      const imageBlock = document.querySelector('.popup_image_open'); //открываем по клику картинку
-      const imageBlockPic = imageBlock.querySelector('.image-block__image');
-      const imageBlockText = imageBlock.querySelector('.image-block__text');
-      imageBlockPic.src = this._imageSrc; //присваиваем открываемому изображению адресс изображения карточки
-      imageBlockText.textContent = this._placeName;//подпись к изображению
-
-      openPopup(imageBlock);
-   }
-
-   _setListeners() {
-      const cardLikeButton = this._newCard.querySelector('.element__button');//обработчик лайков
-      cardLikeButton.addEventListener('click', this._handleCardLikeButton);
-
-      const cardDeleteButton = this._newCard.querySelector('.element__delete-button');//удаление карточек
-      cardDeleteButton.addEventListener('click', () => this._handleDeleteCard());
-
-      const cardMainImage = this._newCard.querySelector('.element__image');
-      cardMainImage.addEventListener('click', () => this._handleViewCardImage());
-   }
-
-   createCard() {
-      this._newCard = this._getTemplate();
-      this._setData();
-      this._setListeners();
-
-      return this._newCard;
-   }
-}
-
 initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
    const arrCards = new Card(item);
    elementsBlock.prepend(arrCards.createCard());
 });
-
 
 function addCard(evt) { //функция добавления новых карточек пользователем
    evt.preventDefault();
@@ -153,6 +103,11 @@ function addCard(evt) { //функция добавления новых кар�
    evt.submitter.disabled = true;
    closePopup(сardAddPopup);
 }
+
+formsList.forEach((formElement) => {
+   const newValidation = new FormValidator(elementClasses, formElement);
+   newValidation.enableValidation();
+});
 
 popupCloseButtons.forEach((button) => { //обработчик крестиков
    const popup = button.closest('.popup');
