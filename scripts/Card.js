@@ -1,62 +1,73 @@
-class Card {
-   constructor(item) {
-      this._placeName = item.name;
-      this._imageSrc = item.link;
+class FormValidator {
+   constructor(data, form) {
+      this._inputSelector = data.inputSelector;
+      this._submitButtonSelector = data.submitButtonSelector;
+      this._inactiveButtonClass = data.inactiveButtonClass;
+      this._inputErrorClass = data.inputErrorClass;
+      this._formElement = form;
    }
 
-   _getTemplate() {
-      const newTemplate = document
-         .querySelector("#template")
-         .content.querySelector(".element")
-         .cloneNode(true);
-
-      return newTemplate;
+   _showErrorMessag(formElement, fieldElement, errorMessage) {
+      const errorElement = formElement.querySelector(`.${fieldElement.id}-error`);
+      fieldElement.classList.add(elementClasses.inputErrorClass);
+      errorElement.textContent = errorMessage;
    }
 
-   _setData() {
-      const elementTitle = this.newCard.querySelector('.element__title');
-      elementTitle.textContent = this._placeName;
-      const elementImage = this.newCard.querySelector('.element__image');
-      elementImage.src = this._imageSrc;
-      elementImage.setAttribute('alt', elementTitle.textContent); //присваиваем атрибуту alt название места
+   _hideErrorMessage(formElement, fieldElement) {
+      const errorElement = formElement.querySelector(`.${fieldElement.id}-error`);
+      fieldElement.classList.remove(elementClasses.inputErrorClass);
+      errorElement.textContent = '';
    }
 
-   _handleCardLikeButton() {
-      elementLikeButton.classList.toggle('element__button_theme_dark');
+   _checkFieldValidity(formElement, fieldElement) {
+      if (!fieldElement.validity.valid) {
+         showErrorMessage(formElement, fieldElement, fieldElement.validationMessage);
+      } else {
+         hideErrorMessage(formElement, fieldElement);
+      }
    }
 
-   _handleDeleteCard() {
-      elementsBlock.removeChild(this.newCard);
+   _hasInvalidField(fieldList) {
+      return fieldList.some((fieldElement) => {
+         return !fieldElement.validity.valid;
+      });
    }
 
-   _handleViewCardImage() {
-      const imageBlock = document.querySelector('.popup_image_open'); //открываем по клику картинку
-      const imageBlockPic = imageBlock.querySelector('.image-block__image');
-      const imageBlockText = imageBlock.querySelector('.image-block__text');
-      imageBlockPic.src = elementImage.src; //присваиваем открываемому изображению адресс изображения карточки
-      imageBlockText.textContent = elementTitle.textContent;//подпись к изображению
-
-      openPopup(imageBlock);
+   _toggleButtonState(fieldList, buttonElement) {
+      if (hasInvalidField(fieldList)) {
+         buttonElement.classList.add(this._inactiveButtonClass);
+         buttonElement.setAttribute("disabled", "disabled");
+      } else {
+         buttonElement.classList.remove(this._inactiveButtonClass);
+         buttonElement.removeAttribute("disabled");
+      }
    }
 
-   // _setListeners() {
-   //    const elementLikeButton = this.newCard.querySelector('.element__button');//обработчик лайков
-   //    elementLikeButton.addEventListener('click', this._handleCardLikeButton);
+   _setEventListeners(fieldElement, buttonElement) {
 
-   //    const elementDeleteButton = this.newCard.querySelector('.element__delete-button');//удаление карточек
-   //    elementDeleteButton.addEventListener('click', () => this._handleDeleteCard());
+      fieldElement.addEventListener('input', function () {
+         this._checkFieldValidity(formElement, fieldElement);
+         this._toggleButtonState(fieldList, buttonElement);
+      });
+   }
 
-   //    elementImage.addEventListener('click', () => this._handleViewCardImage);
-   // }
+   enableValidation() {
+      const fieldList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+      const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
-   createCard() {
-      this._newCard = this._getTemplate();
-      this._setData;
-      // this._setListeners();
+      fieldList.forEach((fieldElement) => {
+         this._setEventListeners(fieldElement, buttonElement);
+      });
 
-      return this._newCard;
+      this._toggleButtonState(fieldList, buttonElement);
    }
 }
+
+const formList = document.querySelectorAll('.popup__form');
+formList.forEach((formElement) => {
+   const newValidation = new FormValidator(elementClasses, formElement);
+   newValidation.enableValidation();
+});
 
 
 
