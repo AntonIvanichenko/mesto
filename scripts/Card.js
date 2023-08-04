@@ -1,4 +1,4 @@
-import { elementsBlock } from "./index.js";
+import { elementsBlock, openPopup } from "./index.js";
 
 export class Card {
    constructor(item) {

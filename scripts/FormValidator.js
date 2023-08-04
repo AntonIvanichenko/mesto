@@ -1,5 +1,3 @@
-import { elementClasses } from "./index.js";
-
 export class FormValidator {
    constructor(data, form) {
       this._formSelector = data.formSelector;
@@ -20,7 +18,7 @@ export class FormValidator {
 
    _hideErrorMessage(formElement, inputElement) {
       const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-      inputElement.classList.remove(elementClasses.inputErrorClass);
+      inputElement.classList.remove(this._inputErrorClass);
       errorElement.textContent = '';
    }
 

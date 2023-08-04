@@ -20,8 +20,7 @@ const сardPlaceInput = сardAddPopup.querySelector('#place');
 const сardImageInput = сardAddPopup.querySelector('#image');
 
 export const elementsBlock = document.querySelector('.elements');
-const templateBlock = document.querySelector('#template').content;
-const elementBlock = templateBlock.querySelector('.element');
+
 
 const initialCards = [
    {
@@ -50,7 +49,7 @@ const initialCards = [
    }
 ];
 
-export const elementClasses = {
+const elementClasses = {
    formSelector: '.popup__form',
    inputSelector: '.popup__field',
    submitButtonSelector: '.popup__submit-button',
@@ -65,7 +64,7 @@ function closeByEsc(evt) { //обработчик esc
    }
 }
 
-const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента
+export const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента
    popup.classList.add('popup_opened');
    document.addEventListener('keydown', closeByEsc);
 }
@@ -86,11 +85,6 @@ function handleProfileFormSubmit(evt) { //Обработчик «отправк�
    closePopup(profilePopupBlock);
 }
 
-initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
-   const arrCards = new Card(item);
-   elementsBlock.prepend(arrCards.createCard());
-});
-
 function addCard(evt) { //функция добавления новых карточек пользователем
    evt.preventDefault();
 
@@ -103,6 +97,11 @@ function addCard(evt) { //функция добавления новых кар�
    evt.submitter.disabled = true;
    closePopup(сardAddPopup);
 }
+
+initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
+   const arrCards = new Card(item);
+   elementsBlock.prepend(arrCards.createCard());
+});
 
 formsList.forEach((formElement) => {
    const newValidation = new FormValidator(elementClasses, formElement);
