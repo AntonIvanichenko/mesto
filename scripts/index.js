@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { initialCards } from './initialCards.js';
 
 //поиск элементов в DOM-дереве
 const popups = document.querySelectorAll('.popup');
@@ -18,43 +19,15 @@ const сardAddPopup = document.querySelector('.popup_card_add');
 const сardAddForm = document.forms['profile-card-form'];
 const сardPlaceInput = сardAddPopup.querySelector('#place');
 const сardImageInput = сardAddPopup.querySelector('#image');
-
 export const elementsBlock = document.querySelector('.elements');
-
-
-const initialCards = [
-   {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-   },
-   {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-   },
-   {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-   },
-   {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-   },
-   {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-   },
-   {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-   }
-];
 
 const elementClasses = {
    formSelector: '.popup__form',
    inputSelector: '.popup__field',
    submitButtonSelector: '.popup__submit-button',
    inactiveButtonClass: 'popup__submit-button_disabled',
-   inputErrorClass: 'popup__field_type_error'
+   inputErrorClass: 'popup__field_type_error',
+   buttonElement: '.popup__submit-button',
 };
 
 function closeByEsc(evt) { //обработчик esc 
@@ -81,8 +54,12 @@ function handleProfileFormSubmit(evt) { //Обработчик «отправк�
 
    profileTitle.textContent = profilePopupInputName.value;
    profileParagraph.textContent = profilePopupInputJob.value;
-
    closePopup(profilePopupBlock);
+}
+
+function createCard(info, templateSelector) {
+   const newCard = new Card(info, templateSelector);
+   return newCard;
 }
 
 function addCard(evt) { //функция добавления новых карточек пользователем
@@ -90,16 +67,16 @@ function addCard(evt) { //функция добавления новых кар�
 
    const name = сardPlaceInput.value;
    const link = сardImageInput.value;
-   const userCard = new Card({ name, link });
+   const userCard = createCard({ name, link }, '#template');
    elementsBlock.prepend(userCard.createCard());
    evt.target.reset();
-   evt.submitter.classList.add('popup__submit-button_disabled')
-   evt.submitter.disabled = true;
+   const newValidation = new FormValidator(elementClasses, сardAddForm);
+   newValidation.disableSubmitButton();
    closePopup(сardAddPopup);
 }
 
 initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
-   const arrCards = new Card(item);
+   const arrCards = createCard(item, '#template');
    elementsBlock.prepend(arrCards.createCard());
 });
 
