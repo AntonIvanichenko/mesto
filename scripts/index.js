@@ -5,7 +5,6 @@ import { initialCards } from './initialCards.js';
 //поиск элементов в DOM-дереве
 const popups = document.querySelectorAll('.popup');
 const popupCloseButtons = document.querySelectorAll('.popup__close-icon');
-const formsList = document.querySelectorAll('.popup__form');
 const profileButton = document.querySelector('.profile__button');
 const profileTitle = document.querySelector('.profile__title');
 const profileParagraph = document.querySelector('.profile__paragraph');
@@ -37,17 +36,24 @@ function closeByEsc(evt) { //обработчик esc
    }
 }
 
-export const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента
+export const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента, создаем обект валидации
+   // const formElement = popup.querySelector('.popup__form');
+   // const newValidation = new FormValidator(elementClasses, formElement);
+   // newValidation.enableValidation();
+   // // newValidation.disableSubmitButton();
+   // newValidation.ressetError();
+
    popup.classList.add('popup_opened');
    document.addEventListener('keydown', closeByEsc);
 }
 
-
 const closePopup = (popup) => { //удаляем у элемента класс
    popup.classList.remove('popup_opened');
    document.removeEventListener('keydown', closeByEsc);
+   if (popup.classList.contains('popup_card_add')) {
+      сardAddForm.reset();
+   }
 }
-
 
 function handleProfileFormSubmit(evt) { //Обработчик «отправки» формы, меняем текстовый контент profile 
    evt.preventDefault();
@@ -70,19 +76,12 @@ function addCard(evt) { //функция добавления новых кар�
    const userCard = createCard({ name, link }, '#template');
    elementsBlock.prepend(userCard.createCard());
    evt.target.reset();
-   const newValidation = new FormValidator(elementClasses, сardAddForm);
-   newValidation.disableSubmitButton();
    closePopup(сardAddPopup);
 }
 
 initialCards.forEach(function (item) { //цикл выбора элементов массива, добавление новых карточек
    const arrCards = createCard(item, '#template');
    elementsBlock.prepend(arrCards.createCard());
-});
-
-formsList.forEach((formElement) => {
-   const newValidation = new FormValidator(elementClasses, formElement);
-   newValidation.enableValidation();
 });
 
 popupCloseButtons.forEach((button) => { //обработчик крестиков
@@ -101,6 +100,10 @@ popups.forEach((popup) => { //обработчик overlay
 });
 
 profileButton.addEventListener('click', function () { //слушатель кнопки открытия формы редактирования профиля
+   const formElement = profilePopupBlock.querySelector('.popup__form');
+   const newValidation = new FormValidator(elementClasses, formElement);
+   newValidation.enableValidation();
+   newValidation.ressetError();
    profilePopupInputName.value = profileTitle.textContent;
    profilePopupInputJob.value = profileParagraph.textContent;
    openPopup(profilePopupBlock);
@@ -109,6 +112,10 @@ profileButton.addEventListener('click', function () { //слушатель кн�
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit); //слушатель кнопки "сохранить" формы редактирования профиля
 
 profileCardAddButton.addEventListener('click', function () { //слушатель кнопки "добавить" блока профайл
+   const formElement = сardAddPopup.querySelector('.popup__form');
+   const newValidation = new FormValidator(elementClasses, formElement);
+   newValidation.enableValidation();
+   newValidation.ressetError();
    openPopup(сardAddPopup);
 });
 
