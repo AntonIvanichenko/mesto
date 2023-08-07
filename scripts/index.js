@@ -29,6 +29,25 @@ const elementClasses = {
    buttonElement: '.popup__submit-button',
 };
 
+const rofilePopupValidation = new FormValidator(elementClasses, profilePopupForm);
+rofilePopupValidation.enableValidation();
+
+function openProfilePopup() {
+   rofilePopupValidation.ressetError();
+   profilePopupInputName.value = profileTitle.textContent;
+   profilePopupInputJob.value = profileParagraph.textContent;
+   openPopup(profilePopupBlock);
+}
+
+const cardAddValidation = new FormValidator(elementClasses, сardAddForm);
+cardAddValidation.enableValidation();
+
+function openCardAddPopup() {
+   cardAddValidation.ressetError();
+   cardAddValidation.disableSubmitButton();
+   openPopup(сardAddPopup);
+}
+
 function closeByEsc(evt) { //обработчик esc 
    if (evt.key === 'Escape') {
       const openedPopup = document.querySelector('.popup_opened');
@@ -37,12 +56,6 @@ function closeByEsc(evt) { //обработчик esc
 }
 
 export const openPopup = (popup) => { //Добавляем класс элементу переданному в качестве аргумента, создаем обект валидации
-   // const formElement = popup.querySelector('.popup__form');
-   // const newValidation = new FormValidator(elementClasses, formElement);
-   // newValidation.enableValidation();
-   // // newValidation.disableSubmitButton();
-   // newValidation.ressetError();
-
    popup.classList.add('popup_opened');
    document.addEventListener('keydown', closeByEsc);
 }
@@ -50,9 +63,6 @@ export const openPopup = (popup) => { //Добавляем класс элеме
 const closePopup = (popup) => { //удаляем у элемента класс
    popup.classList.remove('popup_opened');
    document.removeEventListener('keydown', closeByEsc);
-   if (popup.classList.contains('popup_card_add')) {
-      сardAddForm.reset();
-   }
 }
 
 function handleProfileFormSubmit(evt) { //Обработчик «отправки» формы, меняем текстовый контент profile 
@@ -100,23 +110,13 @@ popups.forEach((popup) => { //обработчик overlay
 });
 
 profileButton.addEventListener('click', function () { //слушатель кнопки открытия формы редактирования профиля
-   const formElement = profilePopupBlock.querySelector('.popup__form');
-   const newValidation = new FormValidator(elementClasses, formElement);
-   newValidation.enableValidation();
-   newValidation.ressetError();
-   profilePopupInputName.value = profileTitle.textContent;
-   profilePopupInputJob.value = profileParagraph.textContent;
-   openPopup(profilePopupBlock);
+   openProfilePopup();
 });
 
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit); //слушатель кнопки "сохранить" формы редактирования профиля
 
-profileCardAddButton.addEventListener('click', function () { //слушатель кнопки "добавить" блока профайл
-   const formElement = сardAddPopup.querySelector('.popup__form');
-   const newValidation = new FormValidator(elementClasses, formElement);
-   newValidation.enableValidation();
-   newValidation.ressetError();
-   openPopup(сardAddPopup);
+profileCardAddButton.addEventListener('click', function () { //слушатель кнопки "добавить" блока профайл 
+   openCardAddPopup();
 });
 
 сardAddForm.addEventListener('submit', addCard); //слушатель формы добавления новых карточек пользователем
